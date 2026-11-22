@@ -4,5 +4,5 @@ storage
 config/accounts.json
 config/categories.json
 config/category_rules.json
-config/default-excluded.json
+config/default_excluded.json
 TODO.md

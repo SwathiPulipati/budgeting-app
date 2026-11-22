@@ -11,7 +11,7 @@ import json
 from storage import PARSED_DIR, PROJECT_DIR
 from txn_keys import row_keys
 
-DEFAULT_EXCLUDED_FILE = PROJECT_DIR / "config" / "default-excluded.json"
+DEFAULT_EXCLUDED_FILE = PROJECT_DIR / "config" / "default_excluded.json"
 REQUIRED = ["Date", "Description", "Amount", "Section", "Source File"]
 
 
@@ -106,13 +106,13 @@ def breakdown(view: pd.DataFrame):
 
 def load_default_excluded() -> list:
     """Types switched off by default on the Monthly tab: a JSON array of Type names in
-    config/default-excluded.json (matched ignoring case)."""
+    config/default_excluded.json (matched ignoring case)."""
     try:
         with open(DEFAULT_EXCLUDED_FILE) as f:
             data = json.load(f)
         return [str(t).strip() for t in data if str(t).strip()]
     except (FileNotFoundError, json.JSONDecodeError, TypeError):
-        st.warning("config/default-excluded.json is missing or invalid; no types are excluded by default.")
+        st.warning("config/default_excluded.json is missing or invalid; no types are excluded by default.")
         return []
 
 
@@ -219,7 +219,7 @@ def render_monthly(df: pd.DataFrame):
     ranked = long.groupby("Type")["Amount"].apply(lambda s: s.abs().sum()).sort_values(ascending=False).index.tolist()
     excluded = {t.lower() for t in load_default_excluded()}
     off = [t for t in ranked if t.lower() in excluded]
-    # The key includes the exclusion list, so editing default-excluded.json resets the selection
+    # The key includes the exclusion list, so editing default_excluded.json resets the selection
     chosen = st.multiselect("Types shown (turn types on or off)", ranked,
                             default=[t for t in ranked if t not in off],
                             key="monthly_types_" + "|".join(sorted(excluded)))

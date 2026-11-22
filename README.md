@@ -75,7 +75,7 @@ You should now have these four files in `config/`, ready to edit (see [Configura
 config/accounts.json
 config/categories.json
 config/category_rules.json
-config/default-excluded.json
+config/default_excluded.json
 ```
 
 ### 4. Run the app
@@ -133,7 +133,7 @@ Created and updated by the app when you save a rule, so you normally never edit 
 
 Matching is case-insensitive and checks whether the keyword appears anywhere in the transaction description. If several rules match, the longest keyword wins (so `uber eats` beats `uber`). You can edit or delete rules from the **Manage saved rules** section in the app.
 
-### `default-excluded.json`: hidden by default in the Monthly chart
+### `default_excluded.json`: hidden by default in the Monthly chart
 
 A list of Types that start switched off on the Analysis tab's Monthly view (for example, big one-off categories that would squash the chart). You can still turn them on in the app. Leave it as `[]` if you don't need this.
 
